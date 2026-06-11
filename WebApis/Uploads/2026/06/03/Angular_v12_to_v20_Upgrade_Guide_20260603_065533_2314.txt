@@ -1,0 +1,95 @@
+Migration Complexity Assessment :
+
+| Dimension           | Complexity  | Rationale                                                             |
+| ------------------- | ----------- | --------------------------------------------------------------------- |
+| Angular Version Gap | High        | 8 major versions (12→20); ~4 years of breaking changes stackoverflow  |
+| Bootstrap Migration | Medium-High | jQuery removal, class renaming, data attribute changes getbootstrap+1 |
+| Codebase Size       | Low-Medium  | ~20 screens is manageable; modular architecture helps                 |
+| Regression Risk     | Medium      | Backend already stable; frontend-only changes                         |
+
+
+Critical Version Bridges :
+
+| Version | Key Breaking Changes                                                              |
+| ------- | --------------------------------------------------------------------------------- |
+| 12→13   | TypeScript 4.2+ required, Ivy mandatory, ngx-bootstrap changes dev                |
+| 13→14   | Typed forms (unenforced untyped forms error), TypeScript 4.4+ dev                 |
+| 14→15   | TypeScript 4.6+, standalone components introduced (opt-in) dev                    |
+| 15→16   | TypeScript 4.8+, strict null checks enforced, RxJS 7.5+ reddit                    |
+| 16→17   | TypeScript 5.3+, new control flow @if/@for, standalone defaults                   |
+| 17→18   | TypeScript 5.4+, signals stable, hydration stable, Node.js 18.13+ angular         |
+| 18→19   | TypeScript 5.6+, standalone: true default, signal inputs/outputs stable angular+1 |
+| 19→20   | TypeScript 5.7+, template string literals, host bindings type checking angular    |
+
+Key Architectural Changes to Adopt gradually :
+
+| Feature                      | When to Adopt       | Effort                                         |
+| ---------------------------- | ------------------- | ---------------------------------------------- |
+| Standalone Components        | v16→17 stage        | Medium (automated migration available) angular |
+| New Control Flow (@if, @for) | v17+                | Low (optional, gradual)                        |
+| Signal-based Inputs/Outputs  | v18→19              | Medium (schematic available) pusher            |
+| Zoneless (optional)          | v19+ (experimental) | High (not recommended for this migration)      |
+| Incremental Hydration        | v19+ (SSR only)     | Medium (if using SSR) angular                  |
+
+
+Bootstrap 4 → Bootstrap 5 Impact Analysis : Major Breaking Changes Requiring Manual Work :
+
+| Category          | Bootstrap 4                   | Bootstrap 5               | Migration Effort                        |
+| ----------------- | ----------------------------- | ------------------------- | --------------------------------------- |
+| jQuery Dependency | Required                      | Removed (vanilla JS)      | High - Rewrite all jQuery plugin calls  |
+| Data Attributes   | data-toggle                   | data-bs-toggle            | Medium - Find/replace across 20 screens |
+| Form Classes      | .custom-check, .custom-select | .form-check, .form-select | Medium                                  |
+| Button Block      | .btn-block                    | .d-grid + .gap-*          | Low                                     |
+| Margin/Padding    | .ml-*, .mr-*                  | .ms-*, .me-*              | Medium (RTL naming)                     |
+| Float Utilities   | .float-left/right             | .float-start/end          | Low                                     |
+| Text Utilities    | .text-left/right              | .text-start/end           | Low                                     |
+| Card Decks        | .card-deck                    | Grid system (.row-cols-*) | Medium                                  |
+| Navbar            | No container required         | Container required        | Low per screen                          |
+| Close Button      | .close                        | .btn-close                | Low                                     |
+| Badges            | .badge-primary                | .bg-primary               | Low                                     |
+| Jumbotron         | Available                     | Removed                   | Medium (replace with utilities)         |
+| Popper.js         | v1.x                          | v2.x                      | Low (update package) getbootstrap       |
+
+Dependency Audit Checklist : Critical Dependencies to Review :
+
+| Dependency       | Angular 12 Compatible | Angular 20 Compatible | Action                          |
+| ---------------- | --------------------- | --------------------- | ------------------------------- |
+| TypeScript       | ~4.2-4.3              | ~5.7+                 | Update through versions         |
+| RxJS             | ~6.5-6.6              | ~7.8+                 | Update through versions         |
+| Node.js          | 10.13+ (LTS 12/14)    | 18.13+ or 20.11+      | Must upgrade Node ibm           |
+| ng-bootstrap     | ~10.x-11.x            | ~16.x+                | Check compatibility matrix      |
+| Bootstrap        | 4.x                   | 5.3+                  | Direct upgrade after Angular    |
+| Angular Material | ~12.x                 | ~19.x+                | If used, must upgrade alongside |
+
+Recommended Audit Commands:
+
+ng update --dry-run           # Check current outdated packages
+npm outdated                  # List all outdated dependencies
+ng update @angular/core@13    # Test first upgrade step
+
+
+Risk Mitigation Strategies :
+
+| Risk                                      | Mitigation                                                                             |
+| ----------------------------------------- | -------------------------------------------------------------------------------------- |
+| Breaking changes in intermediate versions | Test each version upgrade before proceeding; use ng update --dry-run                   |
+| jQuery-dependent third-party plugins      | Find alternatives or wrap in Angular directives; audit during Phase 1                  |
+| Custom Bootstrap overrides breaking       | Keep custom Sass isolated; use Bootstrap 5 Sass customization API getbootstrap         |
+| Regression in critical screens            | Prioritize automated testing; use visual regression tools (Percy, Chromatic) talentica |
+| Team knowledge gap on new features        | Allocate learning time in Phase 1; use Angular CLI schematics for automation youtube   |
+
+
+Modern Angular Features to Adopt (Without Full Rewrite) :
+
+| Feature                      | Benefit                                     | Migration Effort   | 
+| ---------------------------- | ------------------------------------------- | ------------------ | 
+| Standalone Components        | Remove NgModules, simpler architecture      | Medium (automated) |
+| Signal-based Inputs/Outputs  | Type-safe, better reactivity                | Medium (schematic) | 
+| New Control Flow (@if, @for) | Better performance, cleaner templates       | Low                |
+| @defer for Lazy Loading      | Improved performance for below-fold content | Low                | 
+| Event Replay (SSR)           | Better UX for server-rendered apps          | Low                | 
+| HMR for Styles/Templates     | Faster development cycle                    | Low                | 
+
+
+Reference :
+https://angular.dev/update-guide?v=13.0-20.0&l=2

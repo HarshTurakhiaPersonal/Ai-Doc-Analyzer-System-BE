@@ -1,0 +1,6 @@
+@AI_Doc_Analyzer_HostAddress = http://localhost:5231
+
+GET {{AI_Doc_Analyzer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

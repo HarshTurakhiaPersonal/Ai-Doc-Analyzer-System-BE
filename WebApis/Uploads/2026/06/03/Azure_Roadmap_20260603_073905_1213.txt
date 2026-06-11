@@ -1,0 +1,67 @@
+General Azure Learning Roadmap (Beginner → Advanced)
+
+Phase 1 — Foundations (Weeks 1–2)
+
+Cloud basics & Azure overview
+Azure account, subscriptions, billing, management groups
+Azure Portal, Azure CLI, Cloud Shell
+Resource groups, tags, Azure Resource Manager (ARM) & Bicep basics
+
+Phase 2 — Core Platform Services (Weeks 3–6)
+
+Compute: VMs, App Service, Containers, Azure Kubernetes Service (AKS)
+Storage: Blob, File, Queue, Table, Disk Storage
+Networking: VNet, Subnets, NSG, Load Balancer, Application Gateway, DNS, VPN Gateway
+Identity: Azure AD (Entra ID), RBAC, Managed Identities, Conditional Access
+
+Phase 3 — Data & Databases (Weeks 7–9)
+
+Azure SQL Database, Managed Instance
+Cosmos DB (NoSQL)
+Azure Cache for Redis
+Data Lake, Azure Synapse Analytics, Databricks basics
+
+Phase 4 — Security, Governance & Monitoring (Weeks 10–12)
+
+Azure Policy, Blueprints, Management Groups
+Azure Security Center / Microsoft Defender for Cloud
+Azure Key Vault, encryption, secrets management
+Azure Monitor, Log Analytics, Application Insights, Alerts
+Backup, Azure Site Recovery
+
+Phase 5 — DevOps, Automation & IaC (Weeks 13–16)
+
+Azure DevOps & GitHub Actions
+CI/CD pipelines for apps & infrastructure
+Infrastructure as Code: ARM, Bicep, Terraform
+Automation Runbooks, Azure Functions (serverless)
+
+Phase 6 — Integration, Serverless & Platform Services (Weeks 17–20)
+
+API Management
+Service Bus, Event Grid, Event Hubs
+Logic Apps, Functions, Event‑driven architectures
+Azure Container Apps, AKS deep dive
+
+Phase 7 — Advanced Networking & Hybrid (Weeks 21–24)
+
+VNet Peering, Private Link, Azure Firewall
+ExpressRoute, Site‑to‑Site & Point‑to‑Site VPN
+Azure Front Door, Traffic Manager
+Hybrid: Azure Arc, Azure Stack
+
+Phase 8 — Observability, Reliability & Cost (Weeks 25–28)
+
+SRE practices, SLIs/SLOs, health models
+High availability, disaster recovery patterns
+Cost Management, budgets, tagging strategies
+Landing zones, enterprise scale landing zone architecture
+
+Phase 9 — Special Topics (Optional / Job‑specific)
+
+Azure AI Services, Azure Machine Learning
+IoT Hub, IoT Edge
+Big Data patterns (Databricks + Delta Lake)
+Multi‑cloud & migration strategies
+
+You can work through this in ~6–8 months at a moderate pace (10–12 hrs/week), or compress to 3–4 months with more intensive study and projects.
